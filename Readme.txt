@@ -1,6 +1,5 @@
-Thanks for downloading this template!
+Financial Brokerage website 
+Devbits Web Development Hackathon
+Team : Jaya, Mehul, Shruti
 
-Template Name: Arsha
-Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
-Author: BootstrapMade.com
-License: https://bootstrapmade.com/license/
+
