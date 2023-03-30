@@ -455,9 +455,12 @@ h6 {
   height: 65px;
   width: 160px;
   border-radius: 50px;
-  background-color: #6f6f7077;
+  background-color: #6f6f708a;
   border: none;
   color: white;
+}
+.nifbt_buttons button:hover{
+  background-color: #6f6f70ec;
 }
 .nifbt_buttons button h5{
   margin-top: 5px;
