@@ -172,7 +172,7 @@ h6 {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: #37517e;
+  color: #47b2e4;
 }
 
 .navbar .getstarted,
@@ -182,14 +182,14 @@ h6 {
   border-radius: 50px;
   color: #fff;
   font-size: 14px;
-  border: 2px solid #37517e;
+  border: 2px solid #47b2e4;
   font-weight: 600;
 }
 
 .navbar .getstarted:hover,
 .navbar .getstarted:focus:hover {
   color: #fff;
-  background: rgb(4, 4, 255);
+  background-color: #47b2e4;
 }
 
 .navbar .dropdown ul {
@@ -376,7 +376,7 @@ h6 {
 #hero {
   width: 100%;
   height: 80vh;
-  background: #000102;
+  background: #000000;
   /* background-image: url('/mobile.avif');
   background-repeat: no-repeat;
   background-size: 2000px 800px;
@@ -445,6 +445,34 @@ h6 {
   animation: up-down 2s ease-in-out infinite alternate-reverse both;
 }
 
+#hero .nifbt_buttons{
+  display: flex;
+  gap: 20px;
+  margin-top: 50px;
+}
+.nifbt_buttons button{
+  font-size: 1rem;
+  height: 70px;
+  width: 180px;
+  border-radius: 50px;
+  background-color: #6f6f708a;
+  border: none;
+  color: white;
+}
+.nifbt_buttons button:hover{
+  background-color: #6f6f70ec;
+}
+.nifbt_buttons button h5{
+  margin-top: 8px;
+  font-family: 'Poppins';
+  font-weight: 500;
+  padding: 5px;
+}
+.nifbt_buttons button p{
+  margin-top: -12px;
+  color: rgba(72, 255, 0, 0.514);
+}
+
 @media (max-width: 991px) {
   #hero {
     height: 100vh;
@@ -511,7 +539,7 @@ section {
 }
 
 .section-bg {
-  background-color: #090506;
+  background-color: #0d0d0e17;
 }
 
 .section-title {
@@ -866,6 +894,7 @@ section {
   line-height: 24px;
   font-size: 14px;
   margin-bottom: 0;
+  
 }
 
 .services .icon-box:hover {
