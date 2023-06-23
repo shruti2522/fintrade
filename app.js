@@ -44,9 +44,9 @@ async function updateNews() {
 }
   
 // Schedule the updateNews function to run daily at 12:00 AM
-cron.schedule('0 0 * * *', updateNews);
+cron.schedule('0 2 * * *', updateNews);
 
-const port = 3000;
+const port = 5001;
 
 app.use(express.static('public'));
 
