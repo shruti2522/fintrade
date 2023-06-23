@@ -44,7 +44,7 @@ async function updateNews() {
 }
   
 // Schedule the updateNews function to run daily at 12:00 AM
-cron.schedule('0 2 * * *', updateNews);
+cron.schedule('0 12 * * *', updateNews);
 
 const port = 5001;
 
