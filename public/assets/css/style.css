@@ -1125,7 +1125,7 @@ section {
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
   padding: 30px;
   border-radius: 5px;
-  background: #fff;
+  background: white;
   transition: 0.5s;
   height: 100%;
 }
@@ -1215,6 +1215,9 @@ section {
   margin-left: 8px;
 }
 
+.team .section-bg{
+  background-color: white;
+}
 /*--------------------------------------------------------------
 # Pricing
 --------------------------------------------------------------*/
@@ -1846,4 +1849,10 @@ section {
   #footer .credits {
     padding-top: 4px;
   }
+}
+
+.newsSeparator {
+  border: none;
+  border-top: 1px solid rgb(190, 188, 188);
+  margin: 10px 0;
 }
