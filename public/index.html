@@ -119,23 +119,34 @@
                 <img src="assets/img/bit.svg" alt="">
                 BTCUSD
               </h5>
-              <p id="btcPrice"></p>
+              <div class="price-container">
+                <p id="btcPrice"></p>
+                <p id="btcChange"></p>
+              </div>
             </button>
             <button id="niftyButton">
               <h5>
                 <img src="assets/img/nifty-50.svg" alt="">
                 NIFTY
               </h5>
-              <p id="niftyPrice"></p>
+              <div class="price-container">
+                <p id="niftyPrice"></p>
+                <p id="niftyChange"></p>
+              </div>
             </button>
             <button id="bankniftyButton">
               <h5>
                 <img src="assets/img/financial.svg" alt="">
                 BANKNIFTY
               </h5>
-              <p id="bankniftyPrice"></p>
+              <div class="price-container">
+                <p id="bankniftyPrice"></p>
+                <p id="bankniftyChange"></p>
+              </div>
             </button>
           </div>
+          
+          
           
         </div>
         
@@ -532,55 +543,114 @@
   });
 });
 
-
   function updatePrices() {
-  // BTCUSD
-  fetch('https://api.markets.sh/api/v1/symbols/BTCUSD?api_token=3a2233156677709a831e3eb87945df8c')
-    .then(response => response.json())
-    .then(data => {
-      var lastPrice = data["last_price"];
-      var price = lastPrice.toString();
-      document.getElementById('btcPrice').textContent = price + ' USD';
-    })
-    .catch(error => {
-      console.log(error); 
-      document.getElementById('btcPrice').textContent = 'Error retrieving data';
-    });
+    // BTCUSD
+    fetch('https://api.markets.sh/api/v1/symbols/BTCUSD?api_token=3a2233156677709a831e3eb87945df8c')
+      .then(response => response.json())
+      .then(data => {
+        var lastPrice = data["last_price"];
+        var price = lastPrice.toString();
+        var btcPriceElement = document.getElementById('btcPrice');
+        var btcChangeElement = document.getElementById('btcChange');
+        var Change = data["change_perc_today"]*100;
+        var btcChange = Change.toString();
 
-  // // NIFTY
-  fetch('https://api.markets.sh/api/v1/symbols/%5ENSEI?api_token=3a2233156677709a831e3eb87945df8c')
-    .then(response => response.json())
-    .then(data => {
-      var lastPrice = data["last_price"];
-      var price = lastPrice.toString();
-      document.getElementById('niftyPrice').textContent = price + ' INR';
-    })
-    .catch(error => {
-      console.log(error); 
-      document.getElementById('niftyPrice').textContent = 'Error retrieving data';
-    });
+        // Fade out price and fade in change
+        btcPriceElement.classList.remove('fade-in');
+        btcPriceElement.classList.add('fade-out');
+        btcChangeElement.classList.remove('fade-out');
+        btcChangeElement.classList.add('fade-in');
 
-    
-  // // BANKNIFTY
-  fetch('https://api.markets.sh/api/v1/symbols/%5ENSEBANK?api_token=3a2233156677709a831e3eb87945df8c')
-    .then(response => response.json())
-    .then(data => {
-      var lastPrice = data["last_price"];
-      var price = lastPrice.toString();
-      document.getElementById('bankniftyPrice').textContent = price + ' INR';
-    })
-    .catch(error => {
-      console.log(error); 
-      document.getElementById('bankniftyPrice').textContent = 'Error retrieving data';
-    });
-}
+        setTimeout(() => {
+          // Update price and hide change
+          btcPriceElement.textContent = price + ' USD';
+          btcChangeElement.textContent = btcChange + ' %';
+          btcPriceElement.classList.remove('fade-out');
+          btcPriceElement.classList.add('fade-in');
+          btcChangeElement.classList.remove('fade-in');
+          btcChangeElement.classList.add('fade-out');
+        }, 2000);
+      })
+      .catch(error => {
+        console.log(error);
+        document.getElementById('btcPrice').textContent = 'Error retrieving data';
+      });
+
+    // NIFTY
+    fetch('https://api.markets.sh/api/v1/symbols/%5ENSEI?api_token=3a2233156677709a831e3eb87945df8c')
+      .then(response => response.json())
+      .then(data => {
+        var lastPrice = data["last_price"];
+        var price = lastPrice.toString();
+        var niftyPriceElement = document.getElementById('niftyPrice');
+        var niftyChangeElement = document.getElementById('niftyChange');
+        var Change = data["change_perc_today"]*100;
+        var niftyChange = Change.toString();
+
+        // Fade out price and fade in change
+        niftyPriceElement.classList.remove('fade-in');
+        niftyPriceElement.classList.add('fade-out');
+        niftyChangeElement.classList.remove('fade-out');
+        niftyChangeElement.classList.add('fade-in');
+
+        setTimeout(() => {
+          // Update price and hide change
+          niftyPriceElement.textContent = price + ' INR';
+          niftyChangeElement.textContent = niftyChange + ' %';
+          niftyPriceElement.classList.remove('fade-out');
+          niftyPriceElement.classList.add('fade-in');
+          niftyChangeElement.classList.remove('fade-in');
+          niftyChangeElement.classList.add('fade-out');
+        }, 2000);
+      })
+      .catch(error => {
+        console.log(error);
+        document.getElementById('niftyPrice').textContent = 'Error retrieving data';
+      });
+
+    // BANKNIFTY
+    fetch('https://api.markets.sh/api/v1/symbols/%5ENSEBANK?api_token=3a2233156677709a831e3eb87945df8c')
+      .then(response => response.json())
+      .then(data => {
+        var lastPrice = data["last_price"];
+        var price = lastPrice.toString();
+        var bankniftyPriceElement = document.getElementById('bankniftyPrice');
+        var bankniftyChangeElement = document.getElementById('bankniftyChange');
+        var Change = data["change_perc_today"]*100;
+        var bankniftyChange = Change.toString();
+
+        // Fade out price and fade in change
+        bankniftyPriceElement.classList.remove('fade-in');
+        bankniftyPriceElement.classList.add('fade-out');
+        bankniftyChangeElement.classList.remove('fade-out');
+        bankniftyChangeElement.classList.add('fade-in');
+
+        setTimeout(() => {
+          // Update price and hide change
+          bankniftyPriceElement.textContent = price + ' INR';
+          bankniftyChangeElement.textContent = bankniftyChange + ' %';
+          bankniftyPriceElement.classList.remove('fade-out');
+          bankniftyPriceElement.classList.add('fade-in');
+          bankniftyChangeElement.classList.remove('fade-in');
+          bankniftyChangeElement.classList.add('fade-out');
+        }, 2000);
+      })
+      .catch(error => {
+        console.log(error);
+        document.getElementById('bankniftyPrice').textContent = 'Error retrieving data';
+      });
+  }
+
+
+  // Initial data update
+    updatePrices();
+
+    // Update data every 5 seconds (5000 milliseconds)
+    setInterval(updatePrices, 6000);
+
 
 // Call the updatePrices function initially
-  updatePrices();
-
-  // Call the updatePrices function every second (1000 milliseconds)
-  setInterval(updatePrices, 1000);
-
+ 
   </script>
 
 </body>

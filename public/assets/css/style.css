@@ -466,12 +466,37 @@ h6 {
   margin-top: 8px;
   font-family: 'Poppins';
   font-weight: 500;
-  padding: 5px;
+  padding: 4px;
 }
-.nifbt_buttons button p{
+#bankniftyPrice{
   margin-top: -12px;
-  color: rgba(72, 255, 0, 0.514);
+  color: rgba(66, 209, 9, 0.945);
   font-weight: 400;
+}
+#btcPrice{
+  margin-top: -12px;
+  color: rgba(66, 209, 9, 0.945);
+  font-weight: 400;
+}
+#niftyPrice{
+  margin-top: -12px;
+  color: rgba(66, 209, 9, 0.945);
+  font-weight: 400;
+}
+#bankniftyChange{
+  margin-top: -12px;
+  color:rgb(255, 0, 0);
+  font-weight: 500;
+}
+#niftyChange{
+  margin-top: -12px;
+  color:rgb(255, 0, 0);
+  font-weight: 500;
+}
+#btcChange{
+  margin-top: -12px;
+  color:rgb(255, 0, 0);
+  font-weight: 500;
 }
 
 @media (max-width: 991px) {
@@ -1874,6 +1899,53 @@ section {
   100% { opacity: 0; }
 }
 
+
+/* .price-container {
+  position: relative;
+  height: 100%;
+}
+
+.price-container p {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.5s;
+}
+
+#btcChange,
+#niftyChange,
+#bankniftyChange {
+  opacity: 0;
+  z-index: 2;
+}
+
+#btcPrice,
+#niftyPrice,
+#bankniftyPrice {
+  z-index: 1;
+} */
 .price-container {
-  animation: fade 6s linear infinite;
+  position: relative;
+  height: 100%;
+}
+
+.price-container p {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.5s;
+}
+
+.price-container p.fade-out {
+  opacity: 0;
+  z-index: 1;
+}
+
+.price-container p.fade-in {
+  opacity: 1;
+  z-index: 2;
 }
