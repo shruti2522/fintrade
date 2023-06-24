@@ -114,28 +114,29 @@
             </form>
           </div>
           <div class="nifbt_buttons">
-            <button>
+            <button id="btcButton">
               <h5>
                 <img src="assets/img/bit.svg" alt="">
                 BTCUSD
               </h5>
-              <p>0.0 INR</p>
+              <p id="btcPrice"></p>
             </button>
-            <button>
+            <button id="niftyButton">
               <h5>
                 <img src="assets/img/nifty-50.svg" alt="">
                 NIFTY
               </h5>
-              <p>0.0 INR</p>
+              <p id="niftyPrice">0.0 INR</p>
             </button>
-            <button>
+            <button id="bankniftyButton">
               <h5>
                 <img src="assets/img/financial.svg" alt="">
                 BANKNIFTY
               </h5>
-              <p>0.0 INR</p>
+              <p id="bankniftyPrice">0.0 INR</p>
             </button>
           </div>
+          
         </div>
         
         <!-- <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
@@ -531,6 +532,37 @@
       }
     });
   });
+
+  function updatePrices() {
+  // BTCUSD
+  fetch('https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=USD&apikey=9R07HDWXSPTYIOF6')
+    .then(response => response.json())
+    .then(data => {
+      var exchangeRate = parseFloat(data['Realtime Currency Exchange Rate']['5. Exchange Rate']).toFixed(2);
+      document.getElementById('btcPrice').textContent = exchangeRate + ' USD';
+    });
+
+  // // NIFTY
+  // fetch('https://api.example.com/nifty')
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     document.getElementById('niftyPrice').textContent = data.price + ' INR';
+  //   });
+
+  // // BANKNIFTY
+  // fetch('https://api.example.com/banknifty')
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     document.getElementById('bankniftyPrice').textContent = data.price + ' INR';
+  //   });
+}
+
+// Call the updatePrices function initially
+  updatePrices();
+
+  // Call the updatePrices function every second (1000 milliseconds)
+  setInterval(updatePrices, 1000);
+
   </script>
 
 </body>
