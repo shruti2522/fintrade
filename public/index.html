@@ -126,14 +126,14 @@
                 <img src="assets/img/nifty-50.svg" alt="">
                 NIFTY
               </h5>
-              <p id="niftyPrice">0.0 INR</p>
+              <p id="niftyPrice"></p>
             </button>
             <button id="bankniftyButton">
               <h5>
                 <img src="assets/img/financial.svg" alt="">
                 BANKNIFTY
               </h5>
-              <p id="bankniftyPrice">0.0 INR</p>
+              <p id="bankniftyPrice"></p>
             </button>
           </div>
           
@@ -505,19 +505,18 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     $(document).ready(() => {
-      const apiUrl = 'http://localhost:3002/news';
+    const apiKey = '9R07HDWXSPTYIOF6';
+    const apiUrl = `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=COIN,CRYPTO:BTC,FOREX:USD&time_from=20220410T0130&limit=200&apikey=${apiKey}`;
 
-    $.get(apiUrl, (feed) => {
+    $.get(apiUrl, (data) => {
+
+      const feed = data.feed;
 
       for (let i = 0; i < feed.length; i++) {
-        const newsHeadline = $('<h3>').text(feed[i].title);
-        newsHeadline.css({
-          // Define the styles for the newsHeadline element
-          color: '#122c6e',
-          fontSize: '18px',
-          fontWeight: 'light'
-        });
-
+        const newsUrl = feed[i].url;
+        const newsHeadline = $('<h3>').append($('<a>').attr('href', newsUrl).text(feed[i].title));
+        newsHeadline.addClass('newsHeadline');
+      
         const newsDescription = $('<p>').text(feed[i].summary);
         newsDescription.css({
           // Define the styles for the newsDescription element
@@ -529,32 +528,51 @@
         $('#news-container').append(newsHeadline, newsDescription);
         $('#news-container').append('<hr class="newsSeparator">');
 
-      }
-    });
+    }
   });
+});
+
 
   function updatePrices() {
   // BTCUSD
-  fetch('https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=USD&apikey=9R07HDWXSPTYIOF6')
+  fetch('https://api.markets.sh/api/v1/symbols/BTCUSD?api_token=3a2233156677709a831e3eb87945df8c')
     .then(response => response.json())
     .then(data => {
-      var exchangeRate = parseFloat(data['Realtime Currency Exchange Rate']['5. Exchange Rate']).toFixed(2);
-      document.getElementById('btcPrice').textContent = exchangeRate + ' USD';
+      var lastPrice = data["last_price"];
+      var price = lastPrice.toString();
+      document.getElementById('btcPrice').textContent = price + ' USD';
+    })
+    .catch(error => {
+      console.log(error); 
+      document.getElementById('btcPrice').textContent = 'Error retrieving data';
     });
 
   // // NIFTY
-  // fetch('https://api.example.com/nifty')
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     document.getElementById('niftyPrice').textContent = data.price + ' INR';
-  //   });
+  fetch('https://api.markets.sh/api/v1/symbols/%5ENSEI?api_token=3a2233156677709a831e3eb87945df8c')
+    .then(response => response.json())
+    .then(data => {
+      var lastPrice = data["last_price"];
+      var price = lastPrice.toString();
+      document.getElementById('niftyPrice').textContent = price + ' INR';
+    })
+    .catch(error => {
+      console.log(error); 
+      document.getElementById('niftyPrice').textContent = 'Error retrieving data';
+    });
 
+    
   // // BANKNIFTY
-  // fetch('https://api.example.com/banknifty')
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     document.getElementById('bankniftyPrice').textContent = data.price + ' INR';
-  //   });
+  fetch('https://api.markets.sh/api/v1/symbols/%5ENSEBANK?api_token=3a2233156677709a831e3eb87945df8c')
+    .then(response => response.json())
+    .then(data => {
+      var lastPrice = data["last_price"];
+      var price = lastPrice.toString();
+      document.getElementById('bankniftyPrice').textContent = price + ' INR';
+    })
+    .catch(error => {
+      console.log(error); 
+      document.getElementById('bankniftyPrice').textContent = 'Error retrieving data';
+    });
 }
 
 // Call the updatePrices function initially

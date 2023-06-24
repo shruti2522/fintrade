@@ -471,6 +471,7 @@ h6 {
 .nifbt_buttons button p{
   margin-top: -12px;
   color: rgba(72, 255, 0, 0.514);
+  font-weight: 400;
 }
 
 @media (max-width: 991px) {
@@ -1855,4 +1856,24 @@ section {
   border: none;
   border-top: 1px solid rgb(190, 188, 188);
   margin: 10px 0;
+}
+
+.newsHeadline {
+  color: #122c6e;
+  font-size: 18px;
+  font-weight: light;
+}
+
+.newsHeadline.newsHeadline::click {
+  color: #47b2e4;
+}
+
+@keyframes fade {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.price-container {
+  animation: fade 6s linear infinite;
 }
