@@ -625,7 +625,7 @@
         var price = lastPrice.toString();
         var bankniftyPriceElement = document.getElementById('bankniftyPrice');
         var bankniftyChangeElement = document.getElementById('bankniftyChange');
-        var Change = data["change_perc_today"]*100;
+        var Change = parseFloat(data["change_perc_today"].toFixed(3))*100;
         var bankniftyChange = Change.toString();
 
         // Fade out price and fade in change
