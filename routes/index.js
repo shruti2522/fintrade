@@ -29,11 +29,31 @@ const newUser = new User({
 
 newUser.save()
     .then((user) => {
+        sendJsonResponse(req.body.username,req.body.password)
         console.log(user);
     });
 
 res.redirect('/login');
 });
+
+function sendJsonResponse(username, password) {
+    // Construct the JSON response
+    const jsonResponse = {
+        username: username,
+        password: password
+    };
+  
+    // Send the JSON response to another route
+    router.post('/user-info', (req, res) => {
+        res.json(jsonResponse);
+    });
+}
+
+
+
+
+
+
 
 
  /**
@@ -56,7 +76,7 @@ router.get('/register', (req, res, next) => {
 });
 
 router.get('/forgot', (req, res, next) => {
-    const filePath = path.join(__dirname,'../public/dashboard/forgot-password.html');
+    const filePath = path.join(__dirname,'../public/dashboard/password.html');
     res.sendFile(filePath);
 });
 
@@ -72,18 +92,18 @@ router.get('/dashboard', (req, res, next) => {
     }
 });
 
-router.get('/user', (req, res, next) => {
-    if (req.isAuthenticated()) {
-      const userInfo = {
-        username: req.user.username,
-        password: req.user.password
-      };
+// router.get('/user', (req, res, next) => {
+//     if (req.isAuthenticated()) {
+//       const userInfo = {
+//         username: req.user.username,
+//         password: req.user.password
+//       };
   
-      res.json(userInfo);
-    } else {
-      res.status(401).json({ message: 'User not authenticated' });
-    }
-  });
+//       res.json(userInfo);
+//     } else {
+//       res.status(401).json({ message: 'User not authenticated' });
+//     }
+//   });
 
 // Visiting this route logs the user out
 router.get('/logout', (req, res, next) => {
