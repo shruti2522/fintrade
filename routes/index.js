@@ -12,7 +12,12 @@ const path = require('path');
 
 
 
-router.post('/login', passport.authenticate('local', { failureRedirect: '/login-failure', successRedirect: 'login-success' }));
+router.post('/login', passport.authenticate('local', { failureRedirect: '/login-failure', successRedirect: '/login-success' }), (req, res) => {
+    res.render('login', { username: req.body.username }); // Pass the username to the login view
+  });
+  
+
+// Middleware function to set the username
 
 router.post('/register', (req, res, next) => {
 const saltHash = genPassword(req.body.password);
@@ -29,7 +34,6 @@ const newUser = new User({
 
 newUser.save()
     .then((user) => {
-        sendJsonResponse(req.body.username,req.body.password)
         console.log(user);
     });
 
@@ -92,6 +96,14 @@ router.get('/dashboard', (req, res, next) => {
     }
 });
 
+router.get('/username', (req, res) => {
+    if (req.isAuthenticated()) {
+      res.json({ username: req.user.username });
+    } else {
+      res.json({ username: '' }); // If user is not authenticated, send an empty username
+    }
+  });
+  
 // router.get('/user', (req, res, next) => {
 //     if (req.isAuthenticated()) {
 //       const userInfo = {

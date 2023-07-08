@@ -46,7 +46,7 @@ app.use(passport.session());
 
 app.use(routes);
 
-const port = 5000;
+const port = 5002;
 
 app.listen(port,()=>{
     console.log(`Server is listening on port ${port}....`)

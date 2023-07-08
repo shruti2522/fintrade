@@ -42,8 +42,8 @@
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
                                     <form class= "user" method="POST" action="/login">
-                                        Enter Email:<br><input type="text" class="form-control form-control-user" name="username">
-                    <br>Enter Password:<br><input type="password" class="form-control form-control-user" name="password">
+                                        Enter Email:<br><input type="text" class="form-control form-control-user" name="username" id="username">
+                    <br>Enter Password:<br><input type="password" class="form-control form-control-user" name="password" id="password">
                     <br><br><input type="submit" class="btn btn-primary btn-user btn-block" value="Login">
                                 
                                         <hr>
@@ -82,6 +82,10 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <!-- <script>
+        const userName = document.getElementById('#username');
+        const username = userName.innerText
+    </script> -->
 
 </body>
 
