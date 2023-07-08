@@ -10,6 +10,8 @@ const path = require('path');
  * -------------- POST ROUTES ----------------
  */
 
+
+
 router.post('/login', passport.authenticate('local', { failureRedirect: '/login-failure', successRedirect: 'login-success' }));
 
 router.post('/register', (req, res, next) => {
@@ -43,13 +45,11 @@ router.get('/', (req, res, next) => {
     res.sendFile(filePath);
 });
 
-// When you visit http://localhost:3000/login, you will see "Login Page"
 router.get('/login', (req, res, next) => {
     const filePath = path.join(__dirname,'../public/dashboard/login.html');
     res.sendFile(filePath);
 });
 
-// When you visit http://localhost:3000/register, you will see "Register Page"
 router.get('/register', (req, res, next) => {
     const filePath = path.join(__dirname,'../public/dashboard/register.html');
     res.sendFile(filePath);
@@ -59,12 +59,7 @@ router.get('/forgot', (req, res, next) => {
     const filePath = path.join(__dirname,'../public/dashboard/forgot-password.html');
     res.sendFile(filePath);
 });
-/**
- * Lookup how to authenticate users on routes with Local Strategy
- * Google Search: "How to use Express Passport Local Strategy"
- * 
- * Also, look up what behaviour express session has without a maxage set
- */
+
 router.get('/dashboard', (req, res, next) => {
     
     // This is how you check if a user is authenticated and protect a route.  You could turn this into a custom middleware to make it less redundant
@@ -77,6 +72,19 @@ router.get('/dashboard', (req, res, next) => {
     }
 });
 
+router.get('/user', (req, res, next) => {
+    if (req.isAuthenticated()) {
+      const userInfo = {
+        username: req.user.username,
+        password: req.user.password
+      };
+  
+      res.json(userInfo);
+    } else {
+      res.status(401).json({ message: 'User not authenticated' });
+    }
+  });
+
 // Visiting this route logs the user out
 router.get('/logout', (req, res, next) => {
     req.logout();
@@ -84,7 +92,8 @@ router.get('/logout', (req, res, next) => {
 });
 
 router.get('/login-success', (req, res, next) => {
-    res.send('<p>You successfully logged in. --> <a href="/dashboard">Go to protected route</a></p>');
+    const filePath = path.join(__dirname,'../public/dashboard/protected.html');
+    res.sendFile(filePath);
 });
 
 router.get('/login-failure', (req, res, next) => {
