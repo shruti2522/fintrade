@@ -375,8 +375,8 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Welcome! <span id="welcome"></span></h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <a href="/logout" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#logoutModal"><i
+                                ></i>Logout</a>
                     </div>
 
                     <!-- Content Row -->
@@ -738,7 +738,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="/logout">Logout</a>
                 </div>
             </div>
         </div>
@@ -763,15 +763,15 @@
 
     <script>
         
-        window.addEventListener('DOMContentLoaded', () => {
-            fetch('/username')
-            .then(response => response.json())
-            .then(data => {
-                const welcomeElement = document.getElementById('welcome');
-                welcomeElement.textContent = data.username;
-            })
-            .catch(error => console.error(error));
-        });
+        // window.addEventListener('DOMContentLoaded', () => {
+        //     fetch('/username')
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         const welcomeElement = document.getElementById('welcome');
+        //         welcomeElement.textContent = data.username;
+        //     })
+        //     .catch(error => console.error(error));
+        // });
 
         window.addEventListener('DOMContentLoaded', () => {
             fetch('/username')
@@ -779,6 +779,16 @@
             .then(data => {
                 const userElement = document.getElementById('username');
                 userElement.textContent = data.username;
+            })
+            .catch(error => console.error(error));
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            fetch('/name')
+            .then(response => response.json())
+            .then(data => {
+                const welcomeElement = document.getElementById('welcome');
+                welcomeElement.textContent = data.name;
             })
             .catch(error => console.error(error));
         });
