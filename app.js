@@ -10,7 +10,7 @@ var passport = require('passport');
 var crypto = require('crypto');
 var routes = require('./routes/index');
 const googleRoutes = require('./routes/google')
-const connection = require('./config/database');
+const connection = require('./config/databaseLocal');
 
 
 const MongoStore = require('connect-mongo')(session);

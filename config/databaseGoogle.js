@@ -4,12 +4,13 @@ require('dotenv').config();
 
 const connectionURL = process.env.MONGO_URI;
 
-const connection = mongoose.createConnection(connectionURL,{
+const gconnection = mongoose.createConnection(connectionURL,{
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
 
 const UserSchema = new mongoose.Schema({
+    _id:String,
     username:String,
     name:String,
     hash:String,
@@ -17,6 +18,6 @@ const UserSchema = new mongoose.Schema({
 })
 
 
-const User = connection.model('User',UserSchema);
+const GoogleUser = gconnection.model('GoogleUser',UserSchema);
 
-module.exports = connection
+module.exports = gconnection

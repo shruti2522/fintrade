@@ -10,7 +10,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: '/auth/google/dashboard'
+  callbackURL: '/auth/google/userprofile'
 }, (accessToken, refreshToken, profile, done) => {
   console.log(profile);
   return done(null, profile);
@@ -19,12 +19,12 @@ passport.use(new GoogleStrategy({
 googleRouter.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 googleRouter.get('/auth/google/callback', passport.authenticate('google', {
-  successRedirect: '/auth/google/dashboard',
+  successRedirect: '/auth/google/userprofile',
   failureRedirect: '/error'
 }));
 
-googleRouter.get('/auth/google/dashboard', (req, res) => {
-  const filePath = path.join(__dirname, '../public/dashboard/dashindex.html');
+googleRouter.get('/auth/google/userprofile', (req, res) => {
+  const filePath = path.join(__dirname, '../public/dashboard/protected.html');
   res.sendFile(filePath);
 });
 
