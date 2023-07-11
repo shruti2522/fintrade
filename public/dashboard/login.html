@@ -18,7 +18,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../dashboard/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/dashboard/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -47,10 +47,10 @@
                     <br><br><input type="submit" class="btn btn-primary btn-user btn-block" value="Login">
                                 
                                         <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
+                                        <a class="btn btn-google btn-user btn-block" id="google-login-btn">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
                                         </a>
-                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                                        <a  class="btn btn-facebook btn-user btn-block">
                                             <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                         </a>
                                     </form>
@@ -82,10 +82,13 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-    <!-- <script>
-        const userName = document.getElementById('#username');
-        const username = userName.innerText
-    </script> -->
+    
+    <script>
+        const logButton = document.getElementById('google-login-btn')
+        logButton.addEventListener("click",()=>{
+            window.location.href='/auth/google/'
+        })
+    </script>
 
 </body>
 

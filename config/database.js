@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema({
     salt:String
 })
 
+
 const User = connection.model('User',UserSchema);
 
 module.exports = connection

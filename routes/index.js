@@ -106,7 +106,7 @@ router.get('/login-success', (req, res, next) => {
 });
 
 router.get('/login-failure', (req, res, next) => {
-    res.send('You entered the wrong password.');
+    res.send('Incorrected username or password');
 });
 
 module.exports = router;

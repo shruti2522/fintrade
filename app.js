@@ -9,7 +9,9 @@ const session = require('express-session');
 var passport = require('passport');
 var crypto = require('crypto');
 var routes = require('./routes/index');
+const googleRoutes = require('./routes/google')
 const connection = require('./config/database');
+
 
 const MongoStore = require('connect-mongo')(session);
 
@@ -45,6 +47,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(routes);
+app.use(googleRoutes);
 
 const port = 5002;
 
