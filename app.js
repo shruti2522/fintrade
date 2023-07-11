@@ -9,14 +9,16 @@ const session = require('express-session');
 var passport = require('passport');
 var crypto = require('crypto');
 var routes = require('./routes/index');
-const googleRoutes = require('./routes/google')
+const googleRoutes = require('./googleConfig/googleAuth')
 const connection = require('./config/databaseLocal');
+
 
 
 
 const MongoStore = require('connect-mongo')(session);
 
 require('./config/passport');
+require('./googleConfig/googleAuth');
 
 require('dotenv').config();
 

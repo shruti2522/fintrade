@@ -10,7 +10,6 @@ const connection = mongoose.createConnection(connectionURL,{
 });
 
 const UserSchema = new mongoose.Schema({
-
     username:String,
     name:String,
     hash:String,
