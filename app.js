@@ -52,7 +52,7 @@ app.use(passport.session());
 app.use(routes);
 app.use(googleRoutes);
 
-const port = 5002;
+const port = 5002||process.env.PORT;
 
 app.listen(port,()=>{
     console.log(`Server is listening on port ${port}....`)

@@ -22,20 +22,20 @@ const UserSchema = new mongoose.Schema({
 
 const GoogleUser = mongoose.model('GoogleUser', UserSchema);
 
-// Configure Passport.js with Google strategy
+
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: 'http://localhost:5002/auth/google/callback'
+
 }, async (accessToken, refreshToken, profile, done) => {
-  // Check if the user already exists in the database
+
   console.log(profile)
   const existingUser = await GoogleUser.findOne({ googleId: profile.id });
   if (existingUser) {
     return done(null, existingUser);
   }
 
-  // Create a new user if not found in the database
   const newUser = new GoogleUser({
     googleId: profile.id,
     displayName: profile.displayName,
@@ -48,9 +48,8 @@ passport.use(new GoogleStrategy({
   done(null, newUser);
 }));
 
-// Configure Passport.js session handling
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user.id);e
 });
 
 passport.deserializeUser((id, done) => {
@@ -74,6 +73,15 @@ googleRouter.get('/auth/google/success', (req, res) => {
 googleRouter.get('/auth/google/failure',(req,res)=>{
   const filePath = path.join(__dirname, '../public/dashboard/404.html');
   res.sendFile(filePath);
+})
+
+googleRouter.get('/displayUser',(req,res)=>{
+  GoogleUser.findOne(id,(err,user)=>{
+    res.send(user);
+    if (err) {
+      res.send('Not found')
+    }
+  })
 })
 
 module.exports = googleRouter;
